@@ -1,4 +1,7 @@
 package exe.fahodo.fahodo.service;
 
-public class TransactionService implements ITransactionService{
+import org.springframework.stereotype.Service;
+
+@Service
+public class TransactionService implements ITransactionService {
 }
