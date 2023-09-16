@@ -1,0 +1,33 @@
+body{
+    width: 100%;
+    margin-top: 0%;
+    margin-left: 0%;
+    /* background-color: rgb(159, 186, 210); */
+    text-align: center;
+}
+
+.footer{
+    position: relative;
+    background: linear-gradient(0.25turn, #FFE5E5, #F5FFFE, #FCF3FF, #FFF4E5);
+    width: 100%;
+    margin-left: 0%;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}
+
+h5{
+    font-weight: bold;
+}
+
+.app{
+    width: 50%;
+    margin-left: 25%;
+}
+
+img{
+    width: 5vh;
+}
+
+.logo{
+    font-family: Allerta Stencil;
+}
