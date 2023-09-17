@@ -16,4 +16,10 @@ public class AuthorService implements IAuthorService {
     public List<Author> GetAllAuthor() {
         return authorRepository.findAll();
     }
+
+    @Override
+    public Author GetAuthorByName(String name) {
+//        return authorRepository.getAuthorByFullName(name);
+        return null;
+    }
 }

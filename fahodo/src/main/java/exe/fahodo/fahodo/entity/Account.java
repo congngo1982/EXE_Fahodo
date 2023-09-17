@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Account")
+@Entity(name = "account")
 public class Account {
     @Id
     private String username;

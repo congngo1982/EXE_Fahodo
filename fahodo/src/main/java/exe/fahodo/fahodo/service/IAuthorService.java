@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IAuthorService {
     public List<Author> GetAllAuthor();
+    public Author GetAuthorByName(String name);
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @Getter@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Author")
+@Entity(name = "author")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

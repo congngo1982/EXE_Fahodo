@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Collection;
+import java.util.List;
 
 @Getter@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Book")
+@Entity(name = "book")
 public class Book {
     @Id
     private int id;
@@ -27,4 +28,7 @@ public class Book {
     private String linkToStore;
     private Long watching;
     private boolean status;
+
+    @ManyToMany(mappedBy = "book")
+    private List<Comment> comments;
 }

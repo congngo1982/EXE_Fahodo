@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "TransactionService")
+@Entity(name = "transactionService")
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
