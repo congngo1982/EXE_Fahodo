@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="styles/style_product.css">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=GFS+Neohellenic&display=swap"
+        rel="stylesheet">
+    <script src="action/ultils.js"></script>
+</head>
+
+<body>
+    <div id="header" w3-include-html="header.html"
+        style="position: relative; width: 90%; margin-left: 5%; background-color: white; z-index: 2;"></div>
+
+    <div class="body">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: 1%;">
+                <div class="row" style="position: relative; width: 100%; overflow: hidden;">
+                    <div class="col-12 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <img class="poster" src="images/conan.jpg" alt="">
+                    </div>
+                    <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4" style="overflow: hidden;">
+                        <div class="subPoster">
+                            <div class=""><img class="subPosterImage" src="images/conan.jpg" alt=""></div>
+                            <div class=""><img class="subPosterImage" src="images/conan.jpg" alt=""></div>
+                            <div class=""><img class="subPosterImage" src="images/conan.jpg" alt=""></div>
+                            <div class=""><img class="subPosterImage" src="images/conan.jpg" alt=""></div>
+                            <div class=""><img class="subPosterImage" src="images/conan.jpg" alt=""></div>
+                            <!-- <img class="subPoster" src="images/conan.jpg" alt=""> -->
+                            <!-- <img class="subPoster" src="images/conan.jpg" alt="">
+                            <img class="subPoster" src="images/conan.jpg" alt="">
+                            <img class="subPoster" src="images/conan.jpg" alt=""> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: 1%;">
+                <div class="book">
+                    <div style="font-size: 150%;">Tác giả: Gosho Aoyama</div>
+                    <div style="font-size: 200%;">Conan</div>
+                    <div style="font-family: GFS Neohellenic; color: rgb(80, 80, 80);"><span>⭐⭐⭐⭐⭐ </span><span> 1 Viewer</span></div>
+                    <div style="font-family: GFS Neohellenic; color: rgb(80, 80, 80);">
+                        “Muôn kiếp nhân sinh” là tác phẩm do Giáo sư John Vũ - Nguyên Phong viết từ năm 2017 và hoàn tất
+                        đầu năm 2020 ghi lại những câu chuyện, trải nghiệm tiền kiếp kỳ lạ từ nhiều kiếp sống của người
+                        bạn tâm giao lâu năm, ông Thomas - một nhà kinh doanh tài chính nổi tiếng ở New York. Những câu
+                        chuyện chưa từng tiết lộ này sẽ giúp mọi người trên thế giới chiêm nghiệm, khám phá các quy luật
+                        về luật Nhân quả và Luân hồi của vũ trụ giữa lúc trái đất đang gặp nhiều tai ương, biến động,
+                        khủng hoảng từng ngày.
+                    </div>
+                    <br>
+                    <div style="font-family: GFS Neohellenic; color: rgb(80, 80, 80);">
+                        Công ty phát hành: Nhã Nam <br>
+                        Ngày xuất bản: 01/07/2019 <br>
+                        Số trang: 220 <br>
+                        Nhà xuất bản: Nhà xuất bản thế giới <br>
+                        Thể loại:
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: 1%;">
+                <div class="book">
+                    <div style="font-size: 120%;">Reviews</div>
+                    <div style="font-size: 120%;">Most reviews</div>
+                    <div id="reviews" class="review">
+                        <div style="font-size: 120%;">Nguyen Cong Ngo &nbsp<span style="font-size: 80%; color: rgb(80, 80, 80);">&nbsp 23/09/2023</span></div>
+                        <div style="font-size: 80%; color: rgb(80, 80, 80);">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. </div>
+                    </div>
+                    <div id="reviews" class="review">
+                        <div style="font-size: 120%;">Nguyen Cong Ngo &nbsp<span style="font-size: 80%; color: rgb(80, 80, 80);">&nbsp 23/09/2023</span></div>
+                        <div style="font-size: 80%; color: rgb(80, 80, 80);">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: 1%;">
+                <div class="book">
+                    <div style="font-size: 120%;">Add a review</div>
+                    <div style="font-size: 80%; color: rgb(80, 80, 80);">Your email address will not be published. Required fields are marked *</div>
+                    <form action="">
+                        <input type="text" name="txtReview" id="txtReview" class="reviewInput" value="" required="required" placeholder="Your Review*">
+                        <input type="text" name="txtEmail" id="txtEmail" class="reviewInput" value="" required="required" placeholder="Enter your Email*">
+                        <div style="font-size: 100%; color: rgb(80, 80, 80); border: none;" class="reviewInput">Your Rating*</div>
+                        <div >⭐⭐⭐⭐⭐</div>
+                        <br>
+                        <button type="button" class="btn btn-dark">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 2%;" w3-include-html="footer.html"></div>
+
+    <script>
+        // window.onscroll = OnScroll;
+        includeHTML();
+    </script>
+</body>
+
+</html>

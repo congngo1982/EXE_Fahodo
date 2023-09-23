@@ -2,47 +2,47 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fahodo</title>
-    <script>
-        function includeHTML() {
-          var z, i, elmnt, file, xhttp;
-          /*loop through a collection of all HTML elements:*/
-          z = document.getElementsByTagName("*");
-          for (i = 0; i < z.length; i++) {
-            elmnt = z[i];
-            /*search for elements with a certain atrribute:*/
-            file = elmnt.getAttribute("w3-include-html");
-            if (file) {
-              /*make an HTTP request using the attribute value as the file name:*/
-              xhttp = new XMLHttpRequest();
-              xhttp.onreadystatechange = function() {
-                if (this.readyState == 4) {
-                  if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-                  if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-                  /*remove the attribute, and call this function once more:*/
-                  elmnt.removeAttribute("w3-include-html");
-                  includeHTML();
-                }
-              }      
-              xhttp.open("GET", file, true);
-              xhttp.send();
-              /*exit the function:*/
-              return;
-            }
-          }
-        };
-        </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fahodo</title>
+  <link rel="stylesheet" href="styles/style_index.css">
+  <script src="action/ultils.js"></script>
+  <script src="action/action_index.js"></script>
+
 </head>
 
-<body>
-    <div w3-include-html="header.html" style="position: relative; width: 90%; margin-left: 5%;"></div> 
-    <div w3-include-html="footer.html"></div> 
+<body onload="getBook()">
+  <div id="header" w3-include-html="header.html"
+    style="position: relative; width: 90%; margin-left: 5%; background-color: white; z-index: 2;"></div>
 
-    <script>
-        includeHTML();
-        </script>
+  <div class="body">
+    <div class="row" id="book">
+
+      <div class="col-6 col-xs-6 col-sm-3 col-md-3 col-lg-3" style="padding: 2%;">
+        <div class="book">
+          <div class="panel">
+            <img class="poster" src="images/conan.jpg" alt="">
+          </div>
+          <div class="title">
+            <h5>Conan</h5>
+            <div>Gosho Aoyama</div>
+            <div>⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div style="margin-top: 2%;" w3-include-html="footer.html"></div>
+
+  <script>
+    window.onscroll = OnScroll;
+    includeHTML();
+
+    var head = document.getElementById("header");
+    head.getAttribute("hehe");
+    console.log(head.getAttribute("header"))
+  </script>
 
 </body>
 

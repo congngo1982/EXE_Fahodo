@@ -1,0 +1,32 @@
+.body {
+    position: relative;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.book {
+    position: relative;
+    width: 80%;
+    margin-left: 10%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5%;
+    background-color: white;
+}
+
+.book:hover{
+    position: absolute;
+    width: 70%;
+    z-index: 1;
+}
+
+.panel {
+    position: relative;
+    width: 100%;
+    /* background-color: wheat; */
+    box-shadow: inset;
+}
+
+.poster {
+    position: relative;
+    width: 80%;
+}

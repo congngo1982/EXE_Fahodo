@@ -1,0 +1,56 @@
+.body {
+    position: relative;
+    width: 90%;
+    margin-left: 5%;
+    /* background-color: bisque; */
+}
+
+.poster{
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.subPoster{
+    position: absolute;
+    height: 90%;
+    margin-top: 10%;
+    width: auto;
+    overflow: scroll;
+}
+.subPoster::-webkit-scrollbar {
+    display: none;
+  }
+
+.subPosterImage{
+    position: relative;
+    padding: 5%;
+    width: 100%;
+}
+
+.book{
+    position: relative;
+    text-align: left;
+}
+
+.review{
+    position: relative;
+    width: 80%;
+    padding: 5% 0 5% 0;
+    /* background-color: black; */
+    border-bottom: 1px solid rgb(80, 80, 80);
+}
+
+.reviewInput{
+    position: relative;
+    width: 100%;
+    border: none;
+    border-bottom: solid 1px rgb(80, 80, 80);
+    padding: 5% 0 0 0;
+}
+
+.reviewInput:focus{
+    position: relative;
+    width: 100%;
+    outline: none;
+}

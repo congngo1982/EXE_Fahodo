@@ -25,12 +25,28 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public List<Book> GetBookByAuthor(int id) {
-        return bookRepository.findByAuthor_Id(id);
+    public List<Book> GetBookByAuthor(int authorId) {
+        return bookRepository.findByAuthor_Id(authorId);
+    }
+
+
+    @Override
+    public Book GetBookById(int id) {
+        return bookRepository.findBookById(id);
     }
 
     @Override
-    public List<Comment> GetAllComment(int id) {
-        return commentService.GetCommentByBook(id);
+    public List<Book> FilterBook(String type) {
+        return bookRepository.findAllByType(type);
+    }
+
+    @Override
+    public List<Book> GetRecommendBook(String type) {
+        return bookRepository.findAllByRatingGreaterThanEqualAndTypeEquals(4.5, type);
+    }
+
+    @Override
+    public List<Book> GetBookByRating() {
+        return bookRepository.findAllByRatingGreaterThanEqual(4.5);
     }
 }

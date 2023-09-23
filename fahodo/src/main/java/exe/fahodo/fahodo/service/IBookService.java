@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface IBookService {
     public List<Book> GetAllBook();
-    public List<Book> GetBookByAuthor(int id);
-    public List<Comment> GetAllComment(int id);
+    public List<Book> GetBookByAuthor(int authorId);
+    public Book GetBookById(int id);
+    public List<Book> FilterBook(String type);
+    public List<Book> GetRecommendBook(String type);
+    public List<Book> GetBookByRating();
 }
