@@ -1,0 +1,45 @@
+.body_signin h2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.body_signin{
+  margin: 2% 50px 75px 10%;
+}
+.show_title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: lightgray;
+  text-align: center;
+  width: 500px;
+  margin: 10px auto;
+}
+
+.check {
+  border-radius: 5%;
+  width: 250px;
+  background-color: whitesmoke;
+}
+
+.uncheck {
+  width: 250px;
+  border-radius: 5%;
+}
+
+.login-form{
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+    margin-top: 80px;
+}
+.login-form .form-group{
+    margin-top: 5%;
+}
+.login-form a{
+   text-decoration: none;
+   color: #000000;
+}
+
+.login-form .btn-login{
+    width: 100%;
+}
