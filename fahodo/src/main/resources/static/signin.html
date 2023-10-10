@@ -1,85 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/signin_signup.css" />
-    <title>Sign In</title>
-    <script>
-      function includeHTML() {
-        var z, i, elmnt, file, xhttp;
-        /*loop through a collection of all HTML elements:*/
-        z = document.getElementsByTagName("*");
-        for (i = 0; i < z.length; i++) {
-          elmnt = z[i];
-          /*search for elements with a certain atrribute:*/
-          file = elmnt.getAttribute("w3-include-html");
-          if (file) {
-            /*make an HTTP request using the attribute value as the file name:*/
-            xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-              if (this.readyState == 4) {
-                if (this.status == 200) {
-                  elmnt.innerHTML = this.responseText;
-                }
-                if (this.status == 404) {
-                  elmnt.innerHTML = "Page not found.";
-                }
-                /*remove the attribute, and call this function once more:*/
-                elmnt.removeAttribute("w3-include-html");
-                includeHTML();
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/signin_signup.css" />
+  <title>Sign In</title>
+  <script>
+    function includeHTML() {
+      var z, i, elmnt, file, xhttp;
+      /*loop through a collection of all HTML elements:*/
+      z = document.getElementsByTagName("*");
+      for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        /*search for elements with a certain atrribute:*/
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          /*make an HTTP request using the attribute value as the file name:*/
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+              if (this.status == 200) {
+                elmnt.innerHTML = this.responseText;
               }
-            };
-            xhttp.open("GET", file, true);
-            xhttp.send();
-            /*exit the function:*/
-            return;
-          }
+              if (this.status == 404) {
+                elmnt.innerHTML = "Page not found.";
+              }
+              /*remove the attribute, and call this function once more:*/
+              elmnt.removeAttribute("w3-include-html");
+              includeHTML();
+            }
+          };
+          xhttp.open("GET", file, true);
+          xhttp.send();
+          /*exit the function:*/
+          return;
         }
       }
-    </script>
-  </head>
+    }
+  </script>
+</head>
 
-  <body>
-    <div
-      class="header_signin"
-      w3-include-html="header.html"
-      style="position: relative; width: 90%; margin-left: 5%"
-    ></div>
-    <div class="body_signin">
-      <h2>My Account</h2>
-      <div class="show_title">
-        <div class="check">
-          <h4>Đăng Nhập</h4>
-        </div>
+<body>
+  <div class="header_signin" w3-include-html="header.html" style="position: relative; width: 90%; margin-left: 5%">
+  </div>
+  <div class="body_signin">
+    <h2>My Account</h2>
+    <div class="show_title">
+      <div class="check">
+        <h4>Đăng Nhập</h4>
+      </div>
+      <a href="signup.html" style="text-decoration: none; color: black;">
         <div class="uncheck">
           <h4>Đăng kí</h4>
         </div>
-      </div>
-      <div class="login-form">
-        <form>
-            <div class="form-group">
-              <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" id="txtPassword" placeholder="Mật khẩu">
-            </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="remember-me">
-              <label class="form-check-label" for="remember-me">Nhớ mật khẩu</label>
-            </div>
-            <button type="submit" class="btn btn-dark btn-login">Đăng nhập</button>
-            <div class="form-group">
-                <a href="/forgot-password">Bạn đã quên mật khẩu ?</a>
-            </div>
-          </form>
-        </form>
-      </div>
+      </a>
     </div>
-    <div class="footer_signin" w3-include-html="footer.html"></div>
+    <div class="login-form">
+      <form>
+        <div class="form-group">
+          <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="txtPassword" placeholder="Mật khẩu">
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="remember-me">
+          <label class="form-check-label" for="remember-me">Nhớ mật khẩu</label>
+        </div>
+        <button type="submit" class="btn btn-dark btn-login">Đăng nhập</button>
+        <div class="form-group">
+          <a href="/forgot-password">Bạn đã quên mật khẩu ?</a>
+        </div>
+      </form>
+      </form>
+    </div>
+  </div>
+  <div class="footer_signin" w3-include-html="footer.html"></div>
 
-    <script>
-      includeHTML();
-    </script>
-  </body>
+  <script>
+    includeHTML();
+  </script>
+</body>
+
 </html>
