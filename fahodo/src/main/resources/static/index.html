@@ -24,7 +24,7 @@
             <img class="poster" src="images/conan.jpg" alt="">
           </div>
           <div class="title">
-            <h5>Conan</h5>
+            <h5 style="height: 40px; overflow: hidden;">Conan</h5>
             <div>Gosho Aoyama</div>
             <div>⭐⭐⭐⭐⭐</div>
           </div>
@@ -42,6 +42,62 @@
     var head = document.getElementById("header");
     head.getAttribute("hehe");
     console.log(head.getAttribute("header"))
+
+    function OnLoadMain() {
+      CallAjax("GET", "http://localhost:8080/book/allbooks", GetAllbook);
+    }
+
+    function GetAllbook(result) {
+      result = JSON.parse(result);
+
+      var bookTemplate = function (img, name, author, rating) {
+        var rate = "⭐⭐⭐⭐⭐";
+        if (rating < 5) {
+          rate = "⭐⭐⭐⭐";
+        } else if (rating < 4) {
+          rate = "⭐⭐⭐"
+        } else if (rating < 3) {
+          rate = "⭐⭐";
+        } else if (rating < 2) {
+          rate = "⭐";
+        }
+        return `<div class="col-6 col-xs-6 col-sm-3 col-md-3 col-lg-3" style="padding: 2%;">
+      <div class="book">
+        <div class="panel">
+          <img class="poster" src="${img}" alt="">
+        </div>
+        <div class="title">
+          <h5 style="height: 25px; overflow: hidden;">${name}</h5>
+          <div>${author}</div>
+          <div>${rate}</div>
+        </div>
+      </div>
+    </div>`;
+      }
+      var book = "";
+      result.forEach(element => {
+        var images = element.bookImages;
+        var img = "";
+        images.forEach(imgE => {
+          if (imgE.type == "poster") {
+            img = imgE.source;
+          }
+        });
+        book += bookTemplate(img, element.description, element.author.fullName, element.rating);
+      });
+      document.getElementById("book").innerHTML = book;
+      console.log(result);
+    }
+
+    function CallAjax(method, url, funcCallBack) {
+      const xhttp = new XMLHttpRequest();
+      var result;
+      xhttp.onload = function () {
+        funcCallBack(this.responseText);
+      }
+      xhttp.open(method, url);
+      xhttp.send();
+    }
   </script>
 
 </body>

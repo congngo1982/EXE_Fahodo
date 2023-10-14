@@ -28,6 +28,8 @@ public class Book {
     private String linkToStore;
     private Long watching;
     private boolean status;
+    @OneToMany(mappedBy = "book")
+    private List<BookImage> bookImages;
 
     @ManyToMany(mappedBy = "book")
     private List<Comment> comments;

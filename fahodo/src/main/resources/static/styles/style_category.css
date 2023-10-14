@@ -1,0 +1,12 @@
+.cate{
+    position: relative;
+}
+.cate_CategoryName{
+    position: relative;
+    width: 30%;
+    margin-left: 3%;
+    text-align: left;
+    font-weight: normal;
+    height: 40px;
+    border-bottom: 1px solid rgb(205, 205, 255);
+}

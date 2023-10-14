@@ -12,4 +12,6 @@ public interface IBookService {
     public List<Book> FilterBook(String type);
     public List<Book> GetRecommendBook(String type);
     public List<Book> GetBookByRating();
+
+    public List<Book> GetTop3(String category);
 }

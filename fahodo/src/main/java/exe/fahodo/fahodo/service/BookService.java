@@ -49,4 +49,9 @@ public class BookService implements IBookService {
     public List<Book> GetBookByRating() {
         return bookRepository.findAllByRatingGreaterThanEqual(4.5);
     }
+
+    @Override
+    public List<Book> GetTop3(String category) {
+        return bookRepository.findTop3ByTypeIgnoreCase(category);
+    }
 }
