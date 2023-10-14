@@ -3,10 +3,7 @@ package exe.fahodo.fahodo.controller;
 import exe.fahodo.fahodo.entity.Book;
 import exe.fahodo.fahodo.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +16,11 @@ public class BookRestController {
     @GetMapping("/allbooks")
     public List<Book> GetAllBook(){
         return bookService.GetAllBook();
+    }
+
+    @GetMapping("getbook/{category}")
+    public List<Book> GetByCategory(@PathVariable("category") String category){
+        return bookService.GetTop3(category);
     }
 
 }
