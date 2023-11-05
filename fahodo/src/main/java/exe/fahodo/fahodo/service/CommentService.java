@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CommentService implements ICommentService{
+public class CommentService implements ICommentService {
     @Autowired
     private CommentRepository commentRepository;
+
     @Override
     public List<Comment> GetAllComment() {
         return commentRepository.findAll();
@@ -19,5 +20,15 @@ public class CommentService implements ICommentService{
     @Override
     public List<Comment> GetCommentByBook(int id) {
         return commentRepository.GetCommentByBookId(id);
+    }
+
+    @Override
+    public String PostComment(Comment comment) {
+        try {
+            commentRepository.save(comment);
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+        return "Success";
     }
 }

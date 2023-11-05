@@ -1,16 +1,15 @@
 package exe.fahodo.fahodo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Collection;
 import java.util.List;
 
-@Getter@Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "book")
@@ -22,6 +21,7 @@ public class Book {
     private Author author;
     private String publicDate;
     private String title;
+    @Column(columnDefinition = "NVARCHAR(2000)")
     private String description;
     private double rating;
     private String type;
@@ -31,6 +31,7 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<BookImage> bookImages;
 
-    @ManyToMany(mappedBy = "book")
+    //    @ManyToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book")
     private List<Comment> comments;
 }

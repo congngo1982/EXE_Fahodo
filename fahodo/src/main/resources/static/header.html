@@ -18,7 +18,7 @@
             <h2><span style="color: #A18A68;">F</span><span>ahodo</span></h2>
         </div>
         <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <form>
+            <form id="searchForm">
                 <input type="text" class="form-control" placeholder="Tìm sách" id="txtSearch" name="txtSearch">
             </form>
         </div>
@@ -39,10 +39,10 @@
         </div>
     </div>
     <div class="row menu">
-        <a href="" class="col-12 col-xs-2 col-sm-2 col-md-2 col-lg-2 menu_item">
+        <a href="index.html" class="col-12 col-xs-2 col-sm-2 col-md-2 col-lg-2 menu_item">
             TRANG CHỦ
         </a>
-        <a href="" class="col-12 col-xs-2 col-sm-2 col-md-2 col-lg-2 menu_item">
+        <a href="page.html" class="col-12 col-xs-2 col-sm-2 col-md-2 col-lg-2 menu_item">
             THỂ LOẠI
         </a>
         <a href="" class="col-12 col-xs-2 col-sm-2 col-md-2 col-lg-2 menu_item">
@@ -60,7 +60,12 @@
     </div>
 
     <script>
-        
+        const form = document.getElementById("searchForm");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            var name = document.getElementById("txtSearch").value;
+            CallAjax("GET", `http://localhost:8080/book/getbookbyname?name=${name}`, GetAllbook);
+        });
     </script>
 
 </body>

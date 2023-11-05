@@ -69,10 +69,10 @@
           <input type="password" class="form-control" id="txtPassword" placeholder="Mật khẩu:">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" id="txtPassword" placeholder="Nhập lại mật khẩu:">
+          <input type="password" class="form-control" id="txtRePassword" placeholder="Nhập lại mật khẩu:">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" id="txtPassword" placeholder="Nhập độ tuổi:">
+          <input type="text" class="form-control" id="txtAge" placeholder="Nhập độ tuổi:">
         </div>
         <div class="form-group">
           <label>Giới tính :</label>
@@ -94,6 +94,21 @@
 
   <script>
     includeHTML();
+
+    function CreateAccount(){
+      var username = document.getElementById("txtEmail").value;
+      var fullName = document.getElementById("txtFullname").value;
+      var password = document.getElementById("txtPassword").value;
+      var repassword = document.getElementById("txtRePassword").value;
+      var age = document.getElementById("txtAge").value;
+      // var gender = document.getElementById("").value;
+      // if(password == repassword){
+      //   var account = {
+      //     username : username,
+      //     name : 
+      //   }
+      // }
+    }
   </script>
 </body>
 

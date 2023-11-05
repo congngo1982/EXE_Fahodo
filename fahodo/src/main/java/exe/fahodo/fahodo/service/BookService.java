@@ -54,4 +54,9 @@ public class BookService implements IBookService {
     public List<Book> GetTop3(String category) {
         return bookRepository.findTop3ByTypeIgnoreCase(category);
     }
+
+    @Override
+    public List<Book> GetBookByName(String name) {
+        return bookRepository.findBookByTitleContainsIgnoreCase(name);
+    }
 }

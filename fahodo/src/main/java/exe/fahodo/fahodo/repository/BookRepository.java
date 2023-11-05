@@ -20,4 +20,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     public List<Book>findAllByRatingGreaterThanEqualAndTypeEquals(double rating, String type);
 
     public  List<Book> findTop3ByTypeIgnoreCase(String category);
+
+    public List<Book> findBookByTitleContainsIgnoreCase(String name);
 }

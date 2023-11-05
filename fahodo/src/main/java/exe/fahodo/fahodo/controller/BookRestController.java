@@ -23,4 +23,21 @@ public class BookRestController {
         return bookService.GetTop3(category);
     }
 
+    @GetMapping("getbookbyId/{bookId}")
+    public Book GetBookById(@PathVariable("bookId")String bookId){
+        int id = 0;
+        try {
+            id =  Integer.parseInt(bookId);
+        }catch (Exception e){
+            return null;
+        }
+        return bookService.GetBookById(id);
+    }
+
+    @GetMapping("getbookbyname")
+    public List<Book> GetBookByName(@RequestParam String name){
+        return bookService.GetBookByName(name);
+    }
+
+
 }

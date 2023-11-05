@@ -7,4 +7,5 @@ import java.util.List;
 public interface ICommentService {
     public List<Comment> GetAllComment();
     public List<Comment> GetCommentByBook(int id);
+    public String PostComment(Comment comment);
 }

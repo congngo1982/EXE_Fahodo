@@ -20,13 +20,14 @@ public class Comment {
     private int id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account", nullable = false)
-    @JsonIgnore
     private Account account;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "book_comment", joinColumns = @JoinColumn(name = "commentId"),
-            inverseJoinColumns = @JoinColumn(name = "bookId"))
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "book_comment", joinColumns = @JoinColumn(name = "commentId"),
+//            inverseJoinColumns = @JoinColumn(name = "bookId"))
+    @ManyToOne
+    @JoinColumn(name = "book", nullable = true)
     @JsonIgnore
-    private List<Book> book;
+    private Book book;
     private String content;
     private String date;
 }
