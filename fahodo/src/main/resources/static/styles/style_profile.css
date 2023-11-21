@@ -1,0 +1,18 @@
+body {
+    position: relative;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.body {
+    position: relative;
+    width: 80%;
+    margin-left: 10%;
+    height: 50vh;
+    overflow: auto;
+}
+
+.body::-webkit-scrollbar {
+    width: 0;
+}

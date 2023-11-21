@@ -48,7 +48,8 @@
         </a>
       </div> -->
 
-      <div class="col-6 col-xs-6 col-sm-3 col-md-3 col-lg-3" style="padding: 2%; background-color: transparent; color: transparent;">
+      <div class="col-6 col-xs-6 col-sm-3 col-md-3 col-lg-3"
+        style="padding: 2%; background-color: transparent; color: transparent;">
         <a href="page.html" style="text-decoration: none;">
           <div class="book" style="box-shadow: none;">
             <div class="panel">
@@ -76,15 +77,16 @@
     console.log(head.getAttribute("header"))
 
     function OnLoadMain() {
+      var authen = GetAuthen();
       var param = window.location.search;;
       const urlParams = new URLSearchParams(param);
       const name = urlParams.get('txtSearch')
       console.log(name)
-      if(name !=null && name != ""){
-        CallAjax("GET", `http://localhost:8080/book/getbookbyname?name=${name}`, GetAllbook);
+      if (name != null && name != "") {
+        CallAjax("GET", `/book/getbookbyname?name=${name}`, GetAllbook);
         document.getElementById("txtSearch").value = name;
-      }else{
-        CallAjax("GET", "http://localhost:8080/book/allbooks", GetAllbook);
+      } else {
+        CallAjax("GET", "/book/allbooks", GetAllbook);
       }
     }
 
@@ -106,7 +108,7 @@
           <a href="book.html?id=${id}" style="text-decoration: none; color: black;">
       <div class="book">
         <div class="panel">
-          <img class="poster" src="${img}" alt="">
+          <img class="poster" id="poster${id}" src="" alt="">
         </div>
         <div class="title">
           <h5 style="height: 25px; overflow: hidden;">${name}</h5>
@@ -128,7 +130,7 @@
         });
         book += bookTemplate(element.id, img, element.title, element.author.fullName, element.rating);
       });
-      if(result.length %4 == 1){
+      if (result.length % 4 == 1) {
         book += `<div class="col-6 col-xs-6 col-sm-3 col-md-3 col-lg-3" style="padding: 2%; background-color: transparent; color: transparent;">
         <a href="page.html" style="text-decoration: none;">
           <div class="book" style="box-shadow: none;">
@@ -145,6 +147,16 @@
       </div>`;
       }
       document.getElementById("book").innerHTML = book;
+      result.forEach(element => {
+        var images = element.bookImages;
+        var img = "";
+        images.forEach(imgE => {
+          if (imgE.type == "poster") {
+            img = imgE.source;
+            document.getElementById(`poster${element.id}`).src = img.split("static")[1];
+          }
+        });
+      });
       console.log(result);
     }
 
@@ -162,13 +174,13 @@
     // form.addEventListener("submit", (e) => {
     //   e.preventDefault();
     //   var name = document.getElementById("txtSearch").value;
-    //   CallAjax("GET", `http://localhost:8080/book/getbookbyname?name=${name}`, GetAllbook);
+    //   CallAjax("GET", `/book/getbookbyname?name=${name}`, GetAllbook);
     // });
 
     function FindBook() {
       debugger;
       var name = document.getElementById("txtSearch").value;
-      CallAjax("GET", `http://localhost:8080/book/getbookbyname?name=${name}`, GetAllbook);
+      CallAjax("GET", `/book/getbookbyname?name=${name}`, GetAllbook);
     }
   </script>
 

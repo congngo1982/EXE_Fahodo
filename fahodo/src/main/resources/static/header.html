@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="header row align-items-center">
+    <div class="header row align-items-center" id="headerReference">
         <div class="col-12 col-xs-2 col-sm-2 col-md-2 col-lg-2 logo">
             <h2><span style="color: #A18A68;">F</span><span>ahodo</span></h2>
         </div>
@@ -31,7 +31,7 @@
                 <a href="signup.html" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4 nav_item nav_effect">
                     ĐĂNG KÍ
                 </a>
-                <a href="" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4 nav_effect">
+                <a href="profile.html" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4 nav_effect">
                     <img src="images/heart.png" class="nav_icon" alt="Image">
                     YÊU THÍCH
                 </a>
@@ -64,8 +64,10 @@
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             var name = document.getElementById("txtSearch").value;
-            CallAjax("GET", `http://localhost:8080/book/getbookbyname?name=${name}`, GetAllbook);
+            CallAjax("GET", `/book/getbookbyname?name=${name}`, GetAllbook);
         });
+
+        
     </script>
 
 </body>

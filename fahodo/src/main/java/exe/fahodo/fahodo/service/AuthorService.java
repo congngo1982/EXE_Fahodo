@@ -22,4 +22,9 @@ public class AuthorService implements IAuthorService {
 //        return authorRepository.getAuthorByFullName(name);
         return null;
     }
+
+    @Override
+    public Author GetAuthorById(int id) {
+        return authorRepository.getAuthorById(id);
+    }
 }

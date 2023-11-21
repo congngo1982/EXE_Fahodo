@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahodo</title>
+    <link rel="stylesheet" href="styles/style_profile.css">
+    <script src="action/ultils.js"></script>
+
+</head>
+
+<body onload="OnLoadMain()">
+    <div id="header" w3-include-html="header.html"
+        style="position: relative; width: 90%; margin-left: 5%; background-color: white; z-index: 2;"></div>
+
+    <div class="body">
+        <h2 style="text-align: left;">Thông tin đơn hàng</h2>
+        <table class="table table-hover" style="text-align: left;">
+            <thead>
+                <tr>
+                    <th>Mã</th>
+                    <th>Sản phẩm</th>
+                    <th>Tên</th>
+                    <th>Gía</th>
+                    <th>Địa Chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Trạng Thái</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyContent">
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                    <td>john@example.com</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                    <td>asdsd</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 2%;" w3-include-html="footer.html"></div>
+
+    <script>
+        window.onscroll = OnScroll;
+        includeHTML();
+        GetAuthen();
+        function OnLoadMain() {
+            GetAuthen();
+            GetOrder();
+        }
+        function GetOrder() {
+            const xhttp = new XMLHttpRequest();
+            var result;
+            xhttp.onload = function () {
+                result = JSON.parse(this.responseText);
+                var orderList = result.orders;
+                var role = result.role;
+                var tbody = "";
+                orderList.forEach(element => {
+                    tbody += GetOrderContent(element, role);
+                });
+                document.getElementById("tbodyContent").innerHTML = tbody;
+            }
+            xhttp.open("GET", `/order/getorder`, false);
+            xhttp.send();
+        }
+
+        function GetOrderContent(order, role) {
+            var status = "";
+            var updateStatus = "";
+
+            var id = order.id;
+            var name = order.name;
+            var product = `/book.html?id=${order.bookId}`;
+            var price = order.totalPrice;
+            switch (order.status) {
+                case 1:
+                    status = role != "CUSTOMER" ? `<button type="button" class="btn btn-success" onclick="UpdateOrder('${id}', '2')">Sẵn sàng giao</button>` : "Đang chuẩn bị";
+                    break;
+                case 2:
+                    status = role != "CUSTOMER" ? `<button type="button" class="btn btn-success" onclick="UpdateOrder('${id}', '3')">Giao hàng thành công</button>` : "Đang giao hàng";
+                    break;
+                case 3:
+                    status = "Giao hàng thành công";
+                    break;
+
+                default:
+                    break;
+            }
+            var status = status;
+            var address = order.address;
+            var phone = order.phone;
+            var content = `<tr>
+                    <td>${id}</td>
+                    <td><a href="${product}">${order.bookTitle}</a></td>
+                    <td>${name}</td>
+                    <td>${price}</td>
+                    <td>${address}</td>
+                    <td>${phone}</td>
+                    <td>${status}</td>
+                </tr>`;
+            return content;
+        }
+
+        function UpdateOrder(id, status) {
+            let xhr = new XMLHttpRequest()
+            xhr.open("PUT", `/order/update?orderId=${id}&status=${status}`, false)
+            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+            xhr.send();
+            xhr.onload = GetOrder();
+        }
+    </script>
+
+</body>
+
+</html>

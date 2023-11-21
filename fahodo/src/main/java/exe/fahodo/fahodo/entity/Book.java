@@ -1,11 +1,12 @@
 package exe.fahodo.fahodo.entity;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -28,10 +29,17 @@ public class Book {
     private String linkToStore;
     private Long watching;
     private boolean status;
+    @Column(nullable = true)
+    private double price;
+
+    private String storeOwner;
     @OneToMany(mappedBy = "book")
     private List<BookImage> bookImages;
 
-    //    @ManyToMany(mappedBy = "book")
     @OneToMany(mappedBy = "book")
     private List<Comment> comments;
+
+//    @OneToMany(mappedBy = "book")
+//    @JsonIgnore
+//    private List<Order> orderInformation;
 }

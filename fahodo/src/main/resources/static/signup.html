@@ -39,75 +39,193 @@
       }
     }
   </script>
+  <script src="action/ultils.js"></script>
 </head>
 
-<body>
+<body onload="OnLoadMain()">
   <div class="header_signin" w3-include-html="header.html" style="position: relative; width: 90%; margin-left: 5%">
   </div>
   <div class="body_signin">
     <h2>My Account</h2>
     <div class="show_title">
-      <a href="signin.html" style="text-decoration: none; color: black;">
+      <a id="isIgnore" href="signin.html" style="text-decoration: none; color: black;">
         <div class="uncheck">
           <h4>Đăng Nhập</h4>
         </div>
       </a>
       <div class="check">
-        <h4>Đăng kí</h4>
+        <h4 id="isAuthen">Đăng kí</h4>
       </div>
     </div>
-    <div class="login-form">
-      <form action="#" method="post">
-        <div class="form-group">
-          <input type="email" class="form-control" id="txtFullname" aria-describedby="emailHelp"
-            placeholder="Họ và tên:">
+    <form class="login-form" id="form" onsubmit="CreateAccount()">
+      <div class="form-group">
+        <input required type="text" class="form-control" id="txtFullname" aria-describedby="emailHelp"
+          placeholder="Họ và tên:">
+      </div>
+      <div class="form-group">
+        <input required type="email" class="form-control" id="txtEmail" placeholder="Email:">
+      </div>
+      <div class="form-group">
+        <input required type="text" class="form-control" id="txtUsername" placeholder="Tên tài khoản:">
+      </div>
+      <div class="form-group">
+        <input required type="password" class="form-control" id="txtPassword" placeholder="Mật khẩu:">
+      </div>
+      <div class="form-group">
+        <input required type="password" class="form-control" id="txtRePassword" placeholder="Nhập lại mật khẩu:">
+      </div>
+      <div class="form-group">
+        <input required type="text" class="form-control" id="txtPhone" placeholder="Nhập số điện thoại:">
+      </div>
+      <div class="form-group row">
+        <div class="col-12 col-xs-12 col-sm-12 col-md-5 col-lg-5">
+          Ngày sinh:
         </div>
-        <div class="form-group">
-          <input type="password" class="form-control" id="txtEmail" placeholder="Email:">
+        <div class="col-12 col-xs-12 col-sm-12 col-md-7 col-lg-7">
+          <input required type="date" class="form-control" id="txtAge" placeholder="Nhập độ tuổi:">
         </div>
-        <div class="form-group">
-          <input type="password" class="form-control" id="txtPassword" placeholder="Mật khẩu:">
+      </div>
+      <div class="form-group row">
+        <div class="col-12 col-xs-12 col-sm-12 col-md-5 col-lg-5">
+          Tạo tài khoản với:
         </div>
-        <div class="form-group">
-          <input type="password" class="form-control" id="txtRePassword" placeholder="Nhập lại mật khẩu:">
+        <div class="col-12 col-xs-12 col-sm-12 col-md-7 col-lg-7">
+          <select name="role" id="txtRole" class="custom-select">
+            <option value="STORE" selected>Cửa hàng</option>
+            <option value="CUSTOMER">Khách hàng</option>
+          </select>
         </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="txtAge" placeholder="Nhập độ tuổi:">
+      </div>
+      <div class="form-group">
+        <label>Giới tính :</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="rdGender" id="rdMale" value="male">
+          <label class="form-check-label" for="rdMale">Nam</label>
         </div>
-        <div class="form-group">
-          <label>Giới tính :</label>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="rdGender" id="rdMale" value="male">
-            <label class="form-check-label" for="rdMale">Nam</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="rdGender" id="rdFemale" value="female">
-            <label class="form-check-label" for="rdFemale">Nữ</label>
-          </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="rdGender" id="rdFemale" value="female">
+          <label class="form-check-label" for="rdFemale">Nữ</label>
         </div>
-        <button type="submit" class="btn btn-dark btn-login">Đăng kí</button>
-      </form>
-      </form>
-    </div>
+        <br>
+      </div>
+      <button type="submit" class="btn btn-dark btn-login" onclick="CreateAccount()">Đăng kí</button>
+    </form>
+  </div>
   </div>
   <div class="footer_signin" w3-include-html="footer.html"></div>
 
   <script>
     includeHTML();
 
-    function CreateAccount(){
-      var username = document.getElementById("txtEmail").value;
-      var fullName = document.getElementById("txtFullname").value;
+    var form = document.getElementById("form");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      CreateAccount();
+    });
+
+    function OnLoadMain() {
+      var authen = GetAuthen();
+      if (authen != null && authen != "") {
+        var username = (authen + "").split("-")[0];
+        document.getElementById("isIgnore").style.display = "none";
+        document.getElementById("isAuthen").innerHTML = "Profile";
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+          var response = JSON.parse(this.responseText);
+          GetUser(response);
+        }
+        xhttp.open("GET", `/account/${username}`, false);
+        xhttp.send();
+      }
+    }
+
+    function GetUser(account) {
+      document.getElementById("txtFullname").value = account.fullName;
+      document.getElementById("txtEmail").value = account.email;
+      document.getElementById("txtUsername").value = account.username;
+      document.getElementById("txtPassword").value = "";
+      document.getElementById("txtRePassword").value = "";
+      document.getElementById("txtPhone").value = account.phone;
+      document.getElementById("txtAge").value = account.birthDate;
+      document.getElementById("txtRole").value = account.role;
+      var genrder = account.gender;
+      if (genrder == "Male") {
+        document.getElementById("rdMale").checked = true;
+      } else {
+        document.getElementById("rdFemale").checked = true;
+      }
+
+      document.getElementById("txtUsername").disabled = true;
+    }
+
+    function CreateAccount() {
+      var name = document.getElementById("txtFullname").value;
+      var email = document.getElementById("txtEmail").value;
+      var username = document.getElementById("txtUsername").value;
       var password = document.getElementById("txtPassword").value;
       var repassword = document.getElementById("txtRePassword").value;
+      var phoneNumber = document.getElementById("txtPhone").value;
       var age = document.getElementById("txtAge").value;
-      // var gender = document.getElementById("").value;
-      // if(password == repassword){
-      //   var account = {
-      //     username : username,
-      //     name : 
-      //   }
-      // }
+      var role = document.getElementById("txtRole").value;
+      var Gender = document.getElementsByName("rdGender");
+      var gender = "";
+      for (var i = 0; i < Gender.length; i++) {
+        if (Gender[i].checked) {
+          gender = Gender[i].value;
+        }
+      }
+
+      if (password == repassword && password != "") {
+        var url = `/account/create`;
+        var account = {
+          'username': username,
+          'password': password,
+          'fullName': name,
+          'birthDate': age,
+          'email': email,
+          'gender': gender,
+          'phone': phoneNumber,
+          'region': 'Viet Nam',
+          'type': '',
+          'role': role,
+          'status': 1
+        };
+        var authen = GetAuthen();
+        if (authen != null && authen != "") {
+          account = {
+            'username': username,
+            'password': password,
+            'fullName': name,
+            'birthDate': age,
+            'email': email,
+            'gender': gender,
+            'phone': phoneNumber,
+            'region': 'Viet Nam',
+            'type': '',
+            'role': role,
+            'status': 1
+          };
+          url = `/account/update`;
+        }
+        let post = JSON.stringify(account);
+
+        let xhr = new XMLHttpRequest()
+        xhr.open("POST", url, true)
+        xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+        if (post != null) {
+          xhr.send(post);
+        }
+        xhr.onload = function (response) {
+          if (this.status == 200) {
+            window.location.href = "/index.html";
+          } else {
+            alert("Error");
+          }
+        }
+      } else {
+        alert("Mật khẩu không khớp");
+      }
     }
   </script>
 </body>

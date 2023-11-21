@@ -4,6 +4,10 @@
 }
 .body_signin{
   margin: 2% 50px 75px 10%;
+  overflow: auto;
+}
+.body_signin::-webkit-scrollbar {
+  width: 10px;
 }
 .show_title {
   display: flex;

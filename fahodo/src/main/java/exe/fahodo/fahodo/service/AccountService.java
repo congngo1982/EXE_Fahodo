@@ -15,4 +15,18 @@ public class AccountService implements IAccountService{
     public List<Account> GetAllAccount() {
         return accountRepository.findAll();
     }
+
+    @Override
+    public Account GetAccountByUsername(String username) {
+        try{
+            return accountRepository.findById(username).get();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public Account CreateAccount(Account account) {
+        return accountRepository.save(account);
+    }
 }

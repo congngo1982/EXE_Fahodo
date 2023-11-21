@@ -15,4 +15,5 @@ public interface IBookService {
 
     public List<Book> GetTop3(String category);
     public List<Book> GetBookByName(String name);
+    public Book CreateBook(Book book);
 }

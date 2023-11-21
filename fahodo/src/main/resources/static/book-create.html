@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Createion</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/book-create.css">
+    <script src="action/ultils.js"></script>
+</head>
+
+<body>
+    <div id="header" w3-include-html="header.html"
+        style="position: relative; width: 90%; margin-left: 5%; background-color: white; z-index: 2;"></div>
+    <div class="form-body">
+        <form action="#">
+            <div class="row">
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label for="txtId">Mã sách</label>
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <input type="text" class="form-control" placeholder="" id="txtId">
+                </div>
+                <br><br><br>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label for="txtTitle">Tên sách</label>
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <input type="text" class="form-control" placeholder="" id="txtTitle">
+                </div>
+                <br><br><br>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label for="txtDes">Mô tả</label>
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <textarea class="form-control" rows="5" id="txtDes"></textarea>
+                    <br>
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label for="txtPublic">Ngày phát hành</label>
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <input type="date" class="form-control" placeholder="" id="txtPublic">
+                </div>
+                <br><br><br>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label for="txtCate">Thể loại</label>
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <select name="cate" id="txtCate" class="custom-select">
+                        <option value="Tuoi tho">Tuổi thơ</option>
+                        <option value="Truyen tranh">Truyện tranh</option>
+                        <option value="Sach">Sách</option>
+                        <option value="Hoc tap">Học tập</option>
+                    </select>
+                </div>
+                <br><br><br>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label for="txtAuthor">Tác giả</label>
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <select name="author" id="txtAuthor" class="custom-select">
+                        <option value="2">Nguyễn Nhật Ánh</option>
+                        <option value="3">Tô Hoài</option>
+                    </select>
+                </div>
+                <br><br><br>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label for="txtPrice">Gía</label>
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <input type="text" class="form-control" placeholder="" id="txtPrice">
+                    <br>
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    Ảnh Poster
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <input type="file" class="customefile" id="posterFile" name="file">
+                </div>
+                <br><br><br>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    Ảnh Mô tả
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <input type="file" class="customefile" id="subPosterFile" name="file" multiple>
+                </div>
+                <br><br><br>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                </div>
+                <div class="col-12 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <button type="button" class="btn btn-success" style="width: 40%;"
+                        onclick="CreateBook()">Tạo</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div style="margin-top: 2%;" w3-include-html="footer.html"></div>
+    <script>
+        includeHTML();
+
+        function CreateBook() {
+            var id = document.getElementById("txtId").value;
+            var title = document.getElementById("txtTitle").value;
+            var description = document.getElementById("txtDes").value;
+            var author = document.getElementById("txtAuthor").value;
+            var type = document.getElementById("txtCate").value;
+            var publicDate = document.getElementById("txtPublic").value;
+            var price = document.getElementById("txtPrice").value;
+            var Book = {
+                "id": id,
+                "author": null,
+                "publicDate": publicDate,
+                "title": title,
+                "description": description,
+                "rating": 4.5,
+                "type": type,
+                "linkToStore": null,
+                "watching": 0,
+                "status": true,
+                "price": price,
+                "storeOwner": "0",
+                "bookImages": null,
+                "comments": null
+            };
+            var id = PostFunction(Book, `/book/create/${author}`, "application/json; charset=UTF-8", UploadImage, UploadSubImage);
+        }
+
+        function PostFunction(content, url, requestHeader, functionCallback1, funcCallBack2) {
+            let post = JSON.stringify(content);
+            let xhr = new XMLHttpRequest()
+            xhr.open("POST", url, true)
+            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+            if (post != null) {
+                xhr.send(post);
+                xhr.onload = function (response) {
+                    if (this.status == 401) {
+                        window.location.href = "/login";
+                    } else if (this.status == 200) {
+                        functionCallback1(this.responseText);
+                        funcCallBack2(this.responseText);
+                    }
+                }
+            }
+        }
+        function UploadImage(id) {
+           console.log(id);
+             var file = document.getElementById("posterFile").files[0];
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+                // AJAX request to upload the file
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', `/book/upload/${id}`, false);
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var result = xhr.responseText;
+                        console.log(result);
+                    } else {
+                        alert('Failed to upload file');
+                    }
+                };
+
+                xhr.send(formData);
+            }
+        }
+
+        function UploadSubImage(id) {
+           console.log(id);
+             var subPoster = document.getElementById("subPosterFile").files;
+            if (subPoster.length > 0) {
+                const formData = new FormData();
+                for(var i = 0; i< subPoster.length; i++){
+                    formData.append('subPoster', subPoster[i]);
+                }
+                // AJAX request to upload the file
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', `/book/uploadmulti/${id}`, false);
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var result = xhr.responseText;
+                        console.log(result);
+                    } else {
+                        alert('Failed to upload file');
+                    }
+                };
+
+                xhr.send(formData);
+            }
+        }
+    </script>
+</body>
+
+</html>

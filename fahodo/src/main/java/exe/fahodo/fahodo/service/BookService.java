@@ -1,8 +1,6 @@
 package exe.fahodo.fahodo.service;
 
 import exe.fahodo.fahodo.entity.Book;
-import exe.fahodo.fahodo.entity.Comment;
-import exe.fahodo.fahodo.repository.AuthorRepository;
 import exe.fahodo.fahodo.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,5 +56,10 @@ public class BookService implements IBookService {
     @Override
     public List<Book> GetBookByName(String name) {
         return bookRepository.findBookByTitleContainsIgnoreCase(name);
+    }
+
+    @Override
+    public Book CreateBook(Book book) {
+        return bookRepository.save(book);
     }
 }
