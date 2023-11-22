@@ -61,6 +61,7 @@ public class OrderRestController {
             orderResponse.setOrders(orders);
         } else if (authentication.getAuthorities().stream()
                 .anyMatch(r -> r.getAuthority().equals("ROLE_STORE"))) {
+            orders = orderService.GetAllOrder();
             orderResponse.setRole("STORE");
             orderResponse.setOrders(orders);
         } else if (authentication.getAuthorities().stream()
