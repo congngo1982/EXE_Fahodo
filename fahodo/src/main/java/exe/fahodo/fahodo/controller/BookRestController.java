@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -93,6 +95,16 @@ public class BookRestController {
             System.out.println(filePath);
             File savedFile = new File(filePath);
             file.transferTo(savedFile);
+
+            BufferedImage originalImage = ImageIO.read(savedFile);
+            int targetWidth = 2000;
+            int targetHeight = 3000;
+            BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+            resizedImage.createGraphics().drawImage(originalImage.getScaledInstance(targetWidth, targetHeight, java.awt.Image.SCALE_SMOOTH), 0, 0, null);
+            // Save the resized image
+            File resizedFile = new File(filePath);
+            ImageIO.write(resizedImage, "jpg", resizedFile);
+
             return new ResponseEntity<>("File uploaded successfully!", HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>("Failed to upload file!", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -120,6 +132,16 @@ public class BookRestController {
                 System.out.println(filePath);
                 File savedFile = new File(filePath);
                 file.transferTo(savedFile);
+
+                BufferedImage originalImage = ImageIO.read(savedFile);
+                int targetWidth = 2000;
+                int targetHeight = 3000;
+                BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+                resizedImage.createGraphics().drawImage(originalImage.getScaledInstance(targetWidth, targetHeight, java.awt.Image.SCALE_SMOOTH), 0, 0, null);
+                // Save the resized image
+                File resizedFile = new File(filePath);
+                ImageIO.write(resizedImage, "jpg", resizedFile);
+
             } catch (IOException e) {
                 isSuccess = new ResponseEntity<>("Failed to upload file!", HttpStatus.INTERNAL_SERVER_ERROR);
             }
