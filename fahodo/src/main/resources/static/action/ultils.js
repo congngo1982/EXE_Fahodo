@@ -43,32 +43,34 @@ function GetAuthen() {
     const xhttp = new XMLHttpRequest();
     var result;
     xhttp.onload = function () {
-        var response = this.responseText;
-        if (response != "") {
-            result = response;
-            document.getElementById("headerReference").innerHTML = `<div class="col-12 col-xs-2 col-sm-2 col-md-2 col-lg-2 logo">
-          <h2><span style="color: #A18A68;">F</span><span>ahodo</span></h2>
-      </div>
-      <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <form id="searchForm">
-              <input type="text" class="form-control" placeholder="Tìm sách" id="txtSearch" name="txtSearch">
-          </form>
-      </div>
-      <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          <div class="row">
-              <a href="signup.html" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4 nav_item nav_effect">
-                  <img src="images/account.png" class="nav_icon" alt="Image">
-                  Tài khoản
-              </a>
-              <a href="/logout" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4 nav_item nav_effect">
-                  Đăng xuất
-              </a>
-              <a href="/profile.html" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4 nav_effect">
-                  <img src="images/heart.png" class="nav_icon" alt="Image">
-                  Cá nhân
-              </a>
+        if (this.status == 200) {
+            var response = this.responseText;
+            if (response != "") {
+                result = response;
+                document.getElementById("headerReference").innerHTML = `<div class="col-12 col-xs-2 col-sm-2 col-md-2 col-lg-2 logo">
+              <h2><span style="color: #A18A68;">F</span><span>ahodo</span></h2>
           </div>
-      </div>`;
+          <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <form id="searchForm">
+                  <input type="text" class="form-control" placeholder="Tìm sách" id="txtSearch" name="txtSearch">
+              </form>
+          </div>
+          <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <div class="row">
+                  <a href="signup.html" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4 nav_item nav_effect">
+                      <img src="images/account.png" class="nav_icon" alt="Image">
+                      Tài khoản
+                  </a>
+                  <a href="/logout" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4 nav_item nav_effect">
+                      Đăng xuất
+                  </a>
+                  <a href="/profile.html" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4 nav_effect">
+                      <img src="images/heart.png" class="nav_icon" alt="Image">
+                      Cá nhân
+                  </a>
+              </div>
+          </div>`;
+            }
         }
     }
     xhttp.open("GET", "/account/authentication", false);
