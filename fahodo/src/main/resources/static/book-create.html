@@ -10,7 +10,7 @@
     <script src="action/ultils.js"></script>
 </head>
 
-<body>
+<body onload="GetAllAuthor()">
     <div id="header" w3-include-html="header.html"
         style="position: relative; width: 90%; margin-left: 5%; background-color: white; z-index: 2;"></div>
     <div class="form-body">
@@ -101,6 +101,28 @@
     <script>
         includeHTML();
 
+        function GetAllAuthor() {
+            function GetAuthor(id, name) {
+                return `<option value="${id}">${name}</option>`;
+            }
+            const xhttp = new XMLHttpRequest();
+            var result;
+            xhttp.onload = function () {
+                result = JSON.parse(this.responseText);
+                try {
+                    var option = "";
+                    result.forEach(element => {
+                        option += GetAuthor(element.id, element.fullName);
+                    });
+                    document.getElementById("txtAuthor").innerHTML = option;
+                } catch (error) {
+
+                }
+            }
+            xhttp.open("GET", `/author/allauthors`, false);
+            xhttp.send();
+        }
+
         function CreateBook() {
             var id = document.getElementById("txtId").value;
             var title = document.getElementById("txtTitle").value;
@@ -146,8 +168,8 @@
             }
         }
         function UploadImage(id) {
-           console.log(id);
-             var file = document.getElementById("posterFile").files[0];
+            console.log(id);
+            var file = document.getElementById("posterFile").files[0];
             if (file) {
                 const formData = new FormData();
                 formData.append('file', file);
@@ -169,11 +191,11 @@
         }
 
         function UploadSubImage(id) {
-           console.log(id);
-             var subPoster = document.getElementById("subPosterFile").files;
+            console.log(id);
+            var subPoster = document.getElementById("subPosterFile").files;
             if (subPoster.length > 0) {
                 const formData = new FormData();
-                for(var i = 0; i< subPoster.length; i++){
+                for (var i = 0; i < subPoster.length; i++) {
                     formData.append('subPoster', subPoster[i]);
                 }
                 // AJAX request to upload the file
