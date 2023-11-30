@@ -8,7 +8,7 @@ public interface IOrderService {
     public List<Order> GetAllOrder();
     public List<Order> GetOrderByUsername(String username);
 
-    public boolean CreatOrder(Order order);
+    public Order CreatOrder(Order order);
 
     public Order GetOrderById(long id);
 

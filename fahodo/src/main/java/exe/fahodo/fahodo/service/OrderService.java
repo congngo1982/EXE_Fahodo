@@ -2,6 +2,7 @@ package exe.fahodo.fahodo.service;
 
 import exe.fahodo.fahodo.entity.Order;
 import exe.fahodo.fahodo.repository.OrderRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,12 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public boolean CreatOrder(Order order) {
-        boolean result = true;
+    public Order CreatOrder(Order order) {
+        Order result = null;
         try {
-            orderRepository.save(order);
+            result = orderRepository.save(order);
         }catch (Exception ex){
-            result = false;
+            result = null;
         }
         return result;
     }

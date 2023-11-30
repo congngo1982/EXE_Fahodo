@@ -1,9 +1,9 @@
 package exe.fahodo.fahodo.controller;
 
+import exe.fahodo.fahodo.entity.Account;
 import exe.fahodo.fahodo.entity.Order;
 import exe.fahodo.fahodo.entity.OrderResponse;
-import exe.fahodo.fahodo.service.IBookService;
-import exe.fahodo.fahodo.service.IOrderService;
+import exe.fahodo.fahodo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +20,12 @@ public class OrderRestController {
     private IOrderService orderService;
     @Autowired
     private IBookService bookService;
+
+    @Autowired
+    private IAccountService accountService;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/getall")
     public List<Order> GetAll() {
@@ -42,7 +48,11 @@ public class OrderRestController {
         order.setBookTitle(bookService.GetBookById(id).getTitle());
         order.setUsername(authentication.getName());
         System.out.println(order);
-        boolean result = orderService.CreatOrder(order);
+        Order createOrder = orderService.CreatOrder(order);
+        boolean result = createOrder != null ? true : false;
+        emailService.sendEmail(accountService.GetAccountByUsername(authentication.getName()).getEmail(),
+                "Your Order has been Created",
+                EmailTemplate(createOrder));
         return ResponseEntity.ok(result);
     }
 
@@ -81,8 +91,40 @@ public class OrderRestController {
         Order order = orderService.GetOrderById(orderId);
         if (order != null) {
             order.setStatus(status);
-            orderService.CreatOrder(order);
+            Order orderUpdate = orderService.CreatOrder(order);
+            System.out.println(orderUpdate.getStatus());
+            Account account = accountService.GetAccountByUsername(orderUpdate.getUsername());
+            emailService.sendEmail(account.getEmail(),
+                    "Your Order has been Updated",
+                    EmailTemplate(orderUpdate));
         }
         return ResponseEntity.ok("OK");
+    }
+
+    public String EmailTemplate(Order order) {
+        int status = order.getStatus();
+        String orderStatus = "";
+        if(status == 1){
+            orderStatus = "Chờ xác nhận";
+        }
+        if(status == 2){
+            orderStatus = "Sẵn sàng giao";
+        }
+        if(status == 3){
+            orderStatus = "Giao hàng thành công";
+        }
+        String template = String.format("Xin chào %s,\n" +
+                "\n" +
+                "Fahodo xin phép cập nhật trạng thái đơn hàng.\n" +
+                "\n" +
+                "Thông tin chi tiết đơn hàng:\n" +
+                "Mã đơn hàng: %s\n" +
+                "Giá: %,.2f\n" +
+                "Trạng thái: %s\n" +
+                "\n" +
+                "Cảm ơn bạn đã tham khảo và sử dụng dịch vụ tại Fahodo,\n" +
+                "\n" +
+                "FAHODO.", order.getUsername(), order.getId(), order.getTotalPrice(), orderStatus);
+        return template;
     }
 }
